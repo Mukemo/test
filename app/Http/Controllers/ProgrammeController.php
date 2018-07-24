@@ -29,6 +29,21 @@ class ProgrammeController extends Controller
 
     public function store(Request $request)
     {
-       dd($request->all());
+       $programme = new Programme;
+       $programme->heure_debut = $request->heure_debut;
+       $programme->heure_fin = $request->heure_fin;
+       $programme->date = $request->date;
+       $programme->libelle = $request->nom_program;
+       $programme->activite_id = $request->activite;
+       $programme->intervenant_id = $request->intervenant;
+       $programme->save();
+       return redirect()->back()->with('message','Les informations fournies ont ete enregistrer avec succes');
+    }
+
+    public function destroy($id_programme)
+    {
+      $programme = Programme::find($id_programme);
+      $programme->delete();
+      return redirect()->back()->with('message','Vous avez supprimer '.$programme->libelle);
     }
 }

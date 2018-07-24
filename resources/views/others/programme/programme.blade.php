@@ -39,7 +39,7 @@
                   </td>
                   <td>{{ $programme->activite->nom_activite }}</td>
                   <td>
-                     <a href="" class="btn btn-danger"><span class="lnr lnr-trash"></span> Effacer</a>
+                     <a href="{{ route('') }}" class="btn btn-danger"><span class="lnr lnr-trash"></span> Effacer</a>
                   </td>
               </tr>
              @endforeach

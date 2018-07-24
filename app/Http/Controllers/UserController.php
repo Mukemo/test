@@ -35,6 +35,10 @@ class UserController extends Controller
 
     public function logIn()
     {
+        if(Auth::check())
+        {
+          return redirect()->route('admin.dashboard');
+        }
         return view('auth.login');
     }
 
@@ -171,4 +175,31 @@ class UserController extends Controller
       return redirect()->back()->with('message',Auth::user()->nom.' vous avez modifier votre profile d\'utilisateur');
     }
 
+    public function recherche()
+    {
+      return view('others.recherche.recherche');
+    }
+
+    public function recherche_action(Request $request)
+    {
+      $message = [ 'string' => ':attribute doit etre composer d\'une chaine des caracteres'];
+      $validator = Validator::make(
+        $request->all(),[
+        'champ_de_recherche' => 'string'
+      ],
+      $message
+    );
+      if($validator->fails())
+      {
+        return redirect()->back()->withErrors($validator);
+      }
+
+      $q = $request->champ_de_recherche;
+      $personne = Personne::where('nom','LIKE','%'.$q.'%')->orWhere('post_nom','LIKE','%'.$q.'%')->get();
+      if(count($personne) > 0){
+        return view('others.recherche.recherche',compact('personne'));
+      }else{
+        return view('others.recherche.recherche')->with('status','Pas une entree correspondant a '.$q);
+      }
+    }
 }

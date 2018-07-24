@@ -16,10 +16,10 @@
             </div>
             <div class="profile-stat" style="background:rgb(222,0,0);">
               <div class="row">
-                @foreach($personne->participations as $participation)
+                @foreach($personne->activites as $activite)
                   <div class="col-md-4 stat-item" style="font-size:16px;">
                      <img src="{{ asset('/img/ok.png') }}" width="80">
-                     <p>{{ $participation->activite['nom_activite'] }}</p>
+                     <p>{{ $activite->nom_activite }}</p>
                   </div>
                 @endforeach
                 <!-- <div class="col-md-4 stat-item text-center">

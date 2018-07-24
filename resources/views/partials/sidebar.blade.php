@@ -2,8 +2,8 @@
     <div class="sidebar-scroll">
         <nav>
             <ul class="nav">
-
-            <li><a href="{{ route('admin.dashboard') }}" class="active"><i class="fa fa-tachometer-alt"></i> <span>Panneau de contrôle</span></a></li>
+            <li><a href="{{ route('search.index') }}"><i class="fa fa-search"></i><span>Recherche...</span></a></li>
+            <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-tachometer-alt"></i> <span>Panneau de contrôle</span></a></li>
                 @if(Auth::check())
                   @if( Auth::user()->super_admin)
                      <li><a href="{{ route('admin.list') }}" class=""><i class="lnr lnr-list"></i> <span>Liste des admins</span></a></li>

@@ -31,7 +31,7 @@
                   <td>{{ $activite->nom_activite }}</td>
                   <td>{{ $activite->lieu->nom_salle }}</td>
                   <td>
-                     <a href="" class="btn btn-danger"><span class="lnr lnr-trash"></span> Effacer</a>
+                     <a href="{{ route('activite.delete',[ 'id_activite' => $activite->id_activite]) }}" class="btn btn-danger"><span class="lnr lnr-trash"></span> Effacer</a>
                   </td>
               </tr>
              @endforeach

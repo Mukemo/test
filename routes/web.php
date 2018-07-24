@@ -18,6 +18,7 @@ Route::post('/login/custom',[
     'as' => 'login.custom'
 ]);
 
+
 /* admin routes*/
 Route::get('/admin','UserController@index')->name('admin.dashboard');
 Route::get('/admin/list','UserController@adminList')->name('admin.list');
@@ -64,14 +65,19 @@ Route::get('/admin/{id_personne}/personne/voir','PersonneController@voir')->name
 /* affectations routes*/
 
 Route::get('/admin/affectation','AffectationController@index')->name('affectation.index');
-Route::get('/admin/{id}/creer','AffectationController@create')->name('affectation.create');
-Route::get('/admin/{id}/affetcter','AffectationController@affecter')->name('affectation.affecter');
+Route::post('/admin/affectattion/show','AffectationController@show')->name('affectation.store');
+Route::get('/admin/affectation/creer','AffectationController@create')->name('affectation.create');
+Route::get('/admin/{id}/affectation/modifier','AffectationController@update')->name('affectation.modifier');
+Route::get('/admin/{id}/affecter/delete','AffectationController@destroy')->name('affectation.effacer');
+
 /* lieux controller */
 Route::get('/admin/lieu','LieuxController@index')->name('lieu.index');
 Route::get('/admin/lieu/creer','LieuxController@create')->name('lieu.create');
 Route::post('/admin/lieu/store','LieuxController@store')->name('lieu.store');
 Route::get('/admin/{id_lieu}/lieu','LieuxController@destroy')->name('lieu.delete');
-
+/* Recherche controllers*/
+Route::get('/admin/recherche','UserController@recherche')->name('search.index');
+Route::post('/admin/recherche','UserController@recherche_action')->name('search.method');
 /* categories controllers*/
 Route::get('/admin/categorie','CategoriesController@index')->name('categorie.index');
 Route::post('/admin/categorie/creer','CategoriesController@create')->name('categorie.create');
@@ -86,11 +92,16 @@ Route::get('/admin/{id_scat}/sous_categorie','SousCategoriesController@delete')-
 Route::get('/admin/programme','ProgrammeController@index')->name('programme.index');
 Route::get('/admin/programme/creer','ProgrammeController@create')->name('programme.create');
 Route::post('/admin/program/create','ProgrammeController@store')->name('programme.store');
-Auth::routes();
+Route::get('/admin/{id_programme}/program/create','ProgrammeController@destroy')->name('programme.effacer');
+
 /*participations route*/
 Route::get('/admin/participation','ParticipationController@index')->name('participation.index');
+Route::get('/admin/{id_personne}/participation/show','ParticipationController@show')->name('participation.show');
+Route::post('/admin/participation/store','ParticipationController@store')->name('participation.store');
 /*Activites routes*/
 Route::get('/admin/activite','ActiviteController@index')->name('activite.index');
 Route::get('/admin/activite/creer','ActiviteController@create')->name('activite.create');
 Route::post('/admin/activite/store','ActiviteController@store')->name('activite.store');
+Route::get('/admin/{id_activite}/{id_personne}/activite/delete','ActiviteController@destroy')->name('activite.effacer');
+Route::get('/admin/{id_activite}/activite/effacer','ActiviteController@delete')->name('activite.delete');
 /*Route::get('/home', 'HomeController@index')->name('home');*/

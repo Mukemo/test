@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Activite;
 use App\Lieux;
+use App\Personne;
 
 class ActiviteController extends Controller
 {
@@ -40,5 +41,18 @@ class ActiviteController extends Controller
       $activite->lieu_id = $request->lieu;
       $activite->save();
       return redirect()->back()->with('message','L\'information fournie a ete enregistrer avec succes');
+    }
+
+    public function delete($id_activite)
+    {
+      $activite = Activite::find($id_activite);
+      $activite->delete();
+      return redirect()->back()->with('message','vous avez supprimer '.$activite->nom_activite);
+    }
+
+    public function destroy($id_activite, $id_personne)
+    {
+      Personne::find($id_personne)->activites()->detach($id_activite);
+      return back();
     }
 }

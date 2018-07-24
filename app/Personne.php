@@ -25,8 +25,13 @@ class Personne extends Model
       return $this->hasOne('App\Affectation','personne_id');
     }
 
-    public function participations()
+    // public function participations()
+    // {
+    //   return $this->hasMany('App\Participation','personne_id');
+    // }
+
+    public function activites()
     {
-      return $this->hasMany('App\Participation','personne_id');
+      return $this->belongsToMany('App\Activite', 'participations', 'personne_id', 'activite_id');
     }
 }

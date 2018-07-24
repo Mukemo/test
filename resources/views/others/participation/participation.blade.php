@@ -1,12 +1,8 @@
 @extends('layouts.master')
 @section('content')
 <div class="panel">
-  @if(count($participations) > 0)
     <div class="panel-heading">
         <h3 class="panel-title">Liste des particpants.</h3>
-        <div class="right">
-            <a href="" class="btn btn-success"><i class="lnr lnr-plus-circle"></i> Ajouter un particpant</a>
-        </div>
     </div>
     <div class="panel-body">
         <table class="table table-striped">
@@ -19,15 +15,19 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($participations as $participation)
+                @foreach($personnes as $personne)
                 <tr>
-                    <td>{{ $participation->id_participation }}</td>
-                    <td>{{ $participation->personne->nom .' '. $participation->personne->post_nom .' '. $participation->personne->prenom }} </td>
-                    <td>{{ $participation->activite->nom_activite }}</td>
+                    <td>{{ $personne->id_personne }}</td>
+                    <td>{{ $personne->nom .' '. $personne->post_nom .' '. $personne->prenom }} </td>
                     <td>
-                       <a href="" class="btn btn-success"><span class="lnr lnr-eye"></span>Voir</a>
-                       <a href="" class="btn btn-success"><span class="lnr lnr-eye"></span> Modifier</a>
-                       <a href="" class="btn btn-danger"><span class="lnr lnr-trash"></span> Effacer</a>
+                      <ul class="list-group">
+                        @foreach($personne->activites as $activite)
+                          <li class="list-item" style="padding:10px;">{{ $activite->nom_activite }} <a href="{{ route('activite.effacer',[ $activite->id_activite , $personne->id_personne ]) }}" style="background-color:red;color:#fff;font-style:weight;padding:5px;border-radius:2px;margin-left:20px;margin-top:10px;"><span class="lnr lnr-cross"></span></a></li>
+                        @endforeach
+                      </ul>
+                    </td>
+                    <td>
+                       <a href="{{ route('participation.show',[ 'id_personne' => $personne->id_personne ]) }}" class="btn btn-success"><span class="lnr lnr-eye"></span>Faire Participer</a>
                     </td>
                 </tr>
                 @endforeach
@@ -40,11 +40,6 @@
         </div>
     </div>
 </div>
-@else
-  <div class="panel-heading">
-    <h3 class="panel-title">Veuillez entrer les categorie et sous categorie.</h3>
-  </div>
-@endif
 <!-- END RECENT PURCHASES -->
 </div>
 @endsection

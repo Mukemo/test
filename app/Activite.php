@@ -21,8 +21,13 @@ class Activite extends Model
       return $this->belongsTo('App\Lieux','lieu_id');
     }
 
-    public function participation()
+    // public function participations()
+    // {
+    //   return $this->hasMany('App\Participation','activite_id');
+    // }
+
+    public function personnes()
     {
-      return $this->hasOne('App\Participation','activite_id');
+      return $this->belongsToMany('App\Personne', 'participations', 'activite_id', 'personne_id');
     }
 }

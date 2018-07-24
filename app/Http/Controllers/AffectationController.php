@@ -11,17 +11,22 @@ class AffectationController extends Controller
 {
     public function index()
     {
-       // $personnes = Personne::all();
-       // $hotesses = Hotesse::all();
-       // $chauffeurs = Chauffeur::all();
-       //compact('personnes','hotesses','chauffeurs')
        $affectations = Affectation::all();
        return view('others.affectation.affectation',compact('affectations'));
     }
 
-    public function show($id)
+    public function create()
     {
-      $id = Affectation::find($id);
-      return view('others.affectation.');
+      $personnes = Personne::all();
+      $hotesses = Hotesse::all();
+      $chauffeurs = Chauffeur::all();
+      return view('others.affectation.affecter',compact('personnes','activites','chauffeurs'));
+    }
+
+    public function destroy($id)
+    {
+      $affectation = Affectation::find($id);
+      $affectation->delete();
+      return redirect()->back()->with('message','vous avez supprimer une affectation');
     }
 }

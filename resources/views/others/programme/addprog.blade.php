@@ -10,7 +10,7 @@
           @if(Session::has('message'))
             @include('partials.message')
           @endif
-          <h3 class="panel-title">Ajouter un administrateur.</h3>
+          <h3 class="panel-title">Ajouter un programme.</h3>
         </div>
         <div class="panel-body">
           @if( $errors->any())

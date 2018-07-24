@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Participation extends Model
 {
+    public $table = 'participations';
     protected $primaryKey = 'id_participation';
+    protected $fillable = ['activite_id','personne_id'];
 
     public function personne()
     {
